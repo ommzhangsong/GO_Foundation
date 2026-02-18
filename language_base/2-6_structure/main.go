@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"unsafe"
 )
 
 type people struct {
@@ -62,9 +63,9 @@ func main() {
 	// 比如，此时json是个第三方包，但它也用我们的结构体，这个也是导出
 	// 所以如果我们结构体中hometown没有大写的话，我们就不会序列化，或者说不会被json看到
 	// 如果我们要传给前端，一般都是显式。
-	byte, err := json.Marshal(s)
+	byte2, err := json.Marshal(s)
 	exitonError(err)
-	fmt.Println(string(byte))
+	fmt.Println(string(byte2))
 
 	//    空结构体的应用，因为struct{}是占用0字节的，所有的空的struct指向零地址的空间
 
@@ -76,4 +77,15 @@ func main() {
 		fmt.Println(ok)
 	}
 
+	// ❗结构体的内存大小是多少
+	type student2 struct {
+		a bool
+		b bool
+		c int64
+	}
+	var test = student2{true, true, 64}
+	fmt.Println(unsafe.Sizeof(test))
+	// 16字节，因为bool 1字节， 1+1+填充6字节 + 8字节，
+	//结构体的内存填充对齐，不是和我们cashline的结构对齐一样，同一条cacheline一般64B，它这个对齐
+	// 单纯是想要cpu读的快，因为cpu是8B一读，你不能让cpu读一个横跨8B的一个int64。
 }
