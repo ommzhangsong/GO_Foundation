@@ -14,10 +14,16 @@ type people struct {
 type home struct {
 	CityName string
 }
+
+/*
+这里需要注意struct里面字段排列也是有讲究
+在单线程访问，将相同类型字段放在一块，利用cacher局部性原理，减少cache miss
+在多线程并发不同字段的场景，应在字段之间加入padding，避免伪共享。
+*/
 type student struct {
 	Name     string `json:"username" db:"username" validate:"required"` //自定义的结构体标签，在json结构中： username:"zhang"
-	Age      int    `json:"age,omitempty"`                              // 如果是零值那么不会出现在json中
-	Password string `json:"-"`                                          //省略
+	Password string `json:"-"`
+	Age      int    `json:"age,omitempty"` // 如果是零值那么不会出现在json中 //省略
 	people          //隐式“继承”
 	Hometown home   //显式继承，
 	//	只有结构体的组合，没有继承
