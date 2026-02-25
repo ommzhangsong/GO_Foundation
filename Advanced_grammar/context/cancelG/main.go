@@ -9,7 +9,7 @@ import (
 /*
 用来取消携程
 */
-func watch(ctx context.Context, name string) {
+func watch(ctx context.Context, name string) { // context包下的Context接口类型，
 	for {
 		select {
 		case <-ctx.Done():

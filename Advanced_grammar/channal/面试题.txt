@@ -1,0 +1,10 @@
+1.Channel是线程安全的吗?
+一般来说我们对channel就只有读写关闭3种操作这3种操作,
+底层都用runtime.Mutex锁，所以是并发安全的
+2.chan实现原理
+Channel的结构体叫做 runtime.chan
+一共有四点需要 注意
+一拥有runtime mutex去保证读写关闭三者的并发安全
+第二点 通过读写指针 和一个buff数组实现了环形缓冲队列 去存储数据
+第三点拥有读写的等待队列 当一个goroutine对channel进行读或写操作操作没有办法及时完成的时候可以进行 进入到等待队列中等待 当前的G也备go park挂起
+第四点读写操作也能取出等待队列的goroutine并且通过runtime.goready去唤醒goroutine
