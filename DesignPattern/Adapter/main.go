@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-// MessageSender 抽象层
+// MessageSender  抽象层
 // MessageSender 目标接口：系统统一的消息发送接口
 type MessageSender interface {
 	// Send 发送消息
