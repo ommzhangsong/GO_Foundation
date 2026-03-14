@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /*
 编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 s 的形式给出。
 
@@ -16,4 +18,12 @@ func reverseString(s []byte) {
 		right--
 	}
 	return
+}
+func main() {
+	str1 := []byte{'a', 'c', 'd', 3, 4}
+	reverseString(str1)
+	fmt.Println(str1)
+	str := []byte("acd") //类型转化。
+	reverseString(str)
+	fmt.Println(str)
 }
