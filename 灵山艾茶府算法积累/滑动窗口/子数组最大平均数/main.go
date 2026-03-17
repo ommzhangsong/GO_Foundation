@@ -11,24 +11,21 @@ import "fmt"
 */
 func findMaxAverage(nums []int, k int) (res float64) {
 	left := 0
-	right := k
-	if len(nums) == k {
-		return average(nums)
+
+	var sum int
+	for _, v := range nums[0:k] {
+		sum += v
 	}
-	for right < len(nums) {
-		res = max(average(nums[left:right]), res)
+	res = float64(sum) / float64(k)
+
+	for right := k; right < len(nums); right++ {
+		sum += nums[right] - nums[left]
 		left++
-		right++
+		res = max(res, float64(sum)/float64(k))
 	}
 	return res
 }
-func average(nums []int) float64 {
-	var sum int
-	for _, v := range nums {
-		sum += v
-	}
-	return float64(sum) / float64(len(nums))
-}
+
 func max(x, y float64) float64 {
 	if x > y {
 		return x
