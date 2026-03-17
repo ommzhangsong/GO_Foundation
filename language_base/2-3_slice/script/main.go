@@ -20,6 +20,8 @@ func main() {
 
 	b := f(2)
 	fmt.Println(b)
+	var brr = []int{1, 2, 3, 4, 5, 6, 7}
+	fmt.Println(brr[0:7])
 }
 func f(x int) *int {
 	return &x
