@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-	var str1 string = "h中国" //7byte,大小16byte（header）
+	var str1 string = "haa" //7byte,大小16byte（header）
 	fmt.Println(len(str1), unsafe.Sizeof(str1))
 	str2 := "abcdefeg"
 
