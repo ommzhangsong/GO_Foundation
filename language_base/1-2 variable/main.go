@@ -17,7 +17,7 @@ func main() {
 	//c := 200
 	//fmt.Println(c)
 	//fmt.Printf("%T\n", c)
-	////4. 自动识别加声明
+	////4. 自动识别加声明,
 	//var ab = 1.22
 	//fmt.Println(ab)
 	//fmt.Printf("%T\n", ab)
