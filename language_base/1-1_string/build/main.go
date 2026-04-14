@@ -7,10 +7,10 @@ import (
 
 func main() {
 	/*
-	   	它的“黑科技”：
-	      零拷贝转换：最后当你调用 b.String() 时，它通过 unsafe.Pointer 直接把底层的 []byte 强转成 string 返回。它不需要像 bytes.Buffer 那样重新申请一次内存去拷贝数据。
-
-	      只增不减：它只支持写入，不支持修改中间的数据，这保证了其逻辑的简洁和高效。
+		   	它的“黑科技”：
+		      零拷贝转换：特指最后一步，也就是直接把你的ptr拿来用，最后当你调用 b.String() 时，它通过 unsafe.Pointer 直接把底层的 []byte 强转成 string 返回。它不需要像 bytes.Buffer 那样重新申请一次内存去拷贝数据。
+		strings.Builder = 一次性笔，写完直接出成品，不涂改
+		      只增不减：它只支持写入，不支持修改中间的数据，这保证了其逻辑的简洁和高效。
 	*/
 	var b strings.Builder
 	fmt.Printf("初始: len=%d, cap=%d\n", b.Len(), b.Cap())
